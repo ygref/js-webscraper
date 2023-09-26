@@ -16,9 +16,15 @@ async function scrapeWebsite(url) {
       const text = $(element).text().trim();
       extractedText.push(text);
     });
+    const extractedPrice = [];
+    $("span.price").each((index, element) => {
+      const price = $(element).text().trim();
+      extractedPrice.push(price);
+    });
 
     // Process and display the extracted text
     console.log("Extracted Text:", extractedText);
+    console.log("Extraced Price:", extractedPrice);
   } catch (error) {
     console.error("Error:", error);
   }
