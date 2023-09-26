@@ -3,16 +3,13 @@ const cheerio = require("cheerio");
 
 async function scrapeWebsite(url) {
   try {
-    // Fetch the HTML content of the webpage
     const response = await axios.get(url);
     const html = response.data;
 
-    // Load HTML content into Cheerio
     const $ = cheerio.load(html);
 
     const extractedText = [];
     $("h2").each((index, element) => {
-      // Adjust the selector according to the HTML structure
       const text = $(element).text().trim();
       extractedText.push(text);
     });
@@ -22,7 +19,6 @@ async function scrapeWebsite(url) {
       extractedPrice.push(price);
     });
 
-    // Process and display the extracted text
     console.log("Extracted Text:", extractedText);
     console.log("Extraced Price:", extractedPrice);
   } catch (error) {
@@ -30,8 +26,6 @@ async function scrapeWebsite(url) {
   }
 }
 
-// URL of the webpage you want to scrape
 const targetURL = "https://scrapeme.live/shop/";
 
-// Call the scraping function with the target URL
 scrapeWebsite(targetURL);
