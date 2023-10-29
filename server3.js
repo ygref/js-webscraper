@@ -38,22 +38,22 @@ async function scrapeWebsite(cardSet, cardName) {
     console.log("Card Kingdom:", purchasePrice[0]);
     console.log("eBay - But It Now:", purchasePrice[1]);
     console.log("TCGplayer Mid:", purchasePrice[2]);
+    rl.question("Do you want to look for another card? (Yes / No): ", (answer) => {
+      if (answer.toLowerCase() === "yes") {
+        searchForCard();
+      } else {
+        rl.close();
+      }
+    });
   } catch (error) {
     console.error("Error:", error);
   }
 }
 
 function searchForCard() {
-  rl.question("Enter the card name: (Case sensitive)", (cardName) => {
-    rl.question("Enter the set: (Case sensitive)", (cardSet) => {
+  rl.question("Enter the card name: (Case sensitive): ", (cardName) => {
+    rl.question("Enter the set: (Case sensitive): ", (cardSet) => {
       scrapeWebsite(cardSet, cardName);
-      rl.question("Do you want to look for another card? (Yes / No): ", (answer) => {
-        if (answer.toLowerCase() === "yes") {
-          searchForCard();
-        } else {
-          rl.close();
-        }
-      });
     });
   });
 }
